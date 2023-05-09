@@ -9,7 +9,7 @@ if(isset($_GET['id'])){
         echo "Error: ". mysqli_error($conn);
     }
     else{
-        header('location:./home.php');
+        header('location:../index.php');
         exit();
     }
 }

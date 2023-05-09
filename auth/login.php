@@ -16,9 +16,9 @@
        echo $row;
        if ($row > 0) {
          $_SESSION["username"] = $username;
-         header("location:../blog/home.php");
+         header("location:../index.php");
        } else {
-         header("location:../index.php?message=Email or password is incorrect");
+         header("location:./login_form.php?message=Email or password is incorrect");
        }
      }
    }

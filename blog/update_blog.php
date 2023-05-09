@@ -26,7 +26,7 @@ if(isset($_GET['id'])){
                   echo mysqli_error($conn);
               }
               else{
-                  header('location:./home.php');
+                  header('location:../index.php');
                   exit();
               }
           }
@@ -36,7 +36,7 @@ if(isset($_GET['id'])){
         <form action="update_blog.php?id=<?php echo $id; ?>" method="post">
             <div class="mb-3">
                 <label for="inputName" class="form-label">Name</label>
-                <input type="text" disabled name="name" value="<?php echo $row['name']; ?>" class="form-control" id="inputName">
+                <input type="text" name="name" value="<?php echo $row['name']; ?>" class="form-control" id="inputName">
             </div>
             <div class="mb-3">
                 <label for="inputBlog" class="form-label">Blog</label>

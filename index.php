@@ -1,38 +1,99 @@
-   <?php include("./auth/headFoot/header.php") ?>
+   <?php include "./blog/headFoot/header.php"; ?>
    <?php include("./db/dbconn.php") ?>
 
-   <div class="container w-200px m-auto text-center">
-    <h1>Login Form</h1>
-</div>
+   <?php session_start(); ?>
+   <?php
+   if (isset($_SESSION["username"])){
+      echo "<h2 class='container w-200px m-auto text-center'>Welcome ".$_SESSION["username"]."</h2>";
+   }
+   ?>
+
+<div class="container m-auto w-75 text-left border p-4 mt-4">
   <?php
-  if (isset($_GET['message'])){
-    echo "<h4 class='container w-200px m-auto text-center'>".$_GET['message']."</h4>";
+  if (isset($_SESSION["username"])) {
+    echo '
+      <div class="d-flex justify-content-between">
+        <a href="./auth/logout.php">
+          <button class="btn btn-danger mb-2">Log out</button>
+        </a>
+        <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Blog</button>
+      </div>
+    ';
   }
-
   ?>
-<form action="./auth/login.php" method="post" >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-        </div>
-        <div class="modal-body">
-    <div class="mb-3">
-      <label for="InputUserName" class="form-label">Username</label>
-      <input type="text" name="username" class="form-control" id="InputUserName">
-    </div>
-    <div class="mb-3">
-      <label for="InputEmail" class="form-label">Email</label>
-      <input type="email" name="email" class="form-control" id="InputEmail">
-    </div>
+
+  <!-- Blog Start -->
+  
+   <table class="table table-hover table-border table-striped">
+    <thead>
+        <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Blog</th>
+
+          <?php
+  if (isset($_SESSION["username"])) {
+    echo '
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+    ';
+  }
+  ?>
+        
+        </tr>
+    </thead>
+    <tbody>
+
+    <?php
+    $query = "select * from blogpost";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+      echo "No Blog found".mysqli_error($conn);
+    }
+    else{
+      while($row = mysqli_fetch_array($result)){
+        ?>
+        <tr>
+          <td><?php echo $row['name']; ?></td>
+          <td><?php echo $row['blog']; ?></td>
+<?php
+  if (isset($_SESSION["username"])) {
+    echo '
+          <td><a href="./blog/update_blog.php?id='.$row['id'].'" class="btn btn-success">Update</a></td>
+          <td><a href="./blog/delete_blog.php?id='.$row['id'].'" class="btn btn-danger">Delete</a></td>
+    ';
+  }
+?>
+
+        </tr>
+        <?php
+      }
+    }
+    ?>
+    </tbody>
+    </table>
+
+  <form action="./blog/insert_blog.php" method="post">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add New Blog</h5>
+          </div>
+            <div class="modal-body">
+                <div class="form-group">
+                  <label for="inputName">Name</label>
+                  <input type="text" class="form-control" name="name" id="inputName" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                  <label for="inputBlog">Blog</label>
+                  <textarea class="form-control" name="blogText" id="inputBlog" rows="3" placeholder="Enter your Blog"></textarea>
+                </div>
+                <input type="submit" name="add_blog" value="Submit" class="btn btn-primary">
+            </div>
+        <div class="modal-footer">
   </div>
-  <div class="modal-footer d-flex justify-content-between">
-    <input type="submit" name="login_click" value="Submit" class="btn btn-success">
-    <p>don't have an account <a href="./auth/register_from.php">Register</a></p>
-</div>
   </div>
-  </div>
+
 </form>
-
-
-   <?php include("./auth/headFoot/footer.php") ?>
+  <!-- Blog End -->
+ <?php include "./blog/headFoot/footer.php"; ?>

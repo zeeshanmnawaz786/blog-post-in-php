@@ -27,7 +27,7 @@
   </div>
     <div class="modal-footer d-flex justify-content-between">
     <input type="submit" name="register" value="Submit" class="btn btn-success">
-    <p>Have an account <a href="../index.php">Login</a></p>
+    <p>Have an account <a href="./login_form.php">Login</a></p>
 </div>
   </div>
   </div>
