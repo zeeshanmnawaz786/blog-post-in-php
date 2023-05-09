@@ -1,4 +1,4 @@
-   <?php include("./headFoot/header.php") ?>
+   <?php include("./auth/headFoot/header.php") ?>
    <?php include("./db/dbconn.php") ?>
 
   <?php
@@ -32,4 +32,4 @@
 </form>
 
 
-   <?php include("./headFoot/footer.php") ?>
+   <?php include("./auth/headFoot/footer.php") ?>

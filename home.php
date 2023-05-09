@@ -1,4 +1,4 @@
-   <?php include("./headFoot/header.php") ?>
+   <?php include("./auth/headFoot/header.php") ?>
    <?php session_start(); ?>
 
 
@@ -16,4 +16,4 @@
          <button  class="btn btn-danger">Log out</button>
       </a>
    </div>
-   <?php include("./headFoot/footer.php") ?>
+   <?php include("./auth/headFoot/footer.php") ?>
