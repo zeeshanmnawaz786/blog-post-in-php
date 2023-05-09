@@ -23,6 +23,20 @@
   ?>
 
   <!-- Blog Start -->
+    <?php
+  if (!isset($_SESSION["username"])) {
+    echo '
+<div class="container d-flex justify-content-between ">
+  <p class="text-danger">Want to create a new blog?</p>
+  <a href="./auth/login_form.php">
+    <button class="btn btn-primary mb-2">Login</button>
+  </a>
+</div>
+    ';
+
+}
+  ?>
+
   
    <table class="table table-hover table-border table-striped">
     <thead>
