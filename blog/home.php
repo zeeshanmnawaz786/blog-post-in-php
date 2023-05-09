@@ -6,18 +6,21 @@
    if (isset($_SESSION["username"])){
       echo "<h2 class='container w-200px m-auto text-center'>Welcome ".$_SESSION["username"]."</h2>";
    }
-   else{
-      header("location:../index.php");
-   }
    ?>
 
 <div class="container m-auto w-75 text-left border p-4 mt-4">
-  <div class="d-flex justify-content-between">
-  <a href="../auth/logout.php">
-    <button class="btn btn-danger mb-2">Log out</button>
-  </a>
-    <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Blog</button>
-</div>
+  <?php
+  if (isset($_SESSION["username"])) {
+    echo '
+      <div class="d-flex justify-content-between">
+        <a href="../auth/logout.php">
+          <button class="btn btn-danger mb-2">Log out</button>
+        </a>
+        <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Blog</button>
+      </div>
+    ';
+  }
+  ?>
 
   <!-- Blog Start -->
   
@@ -26,8 +29,16 @@
         <tr>
         <th scope="col">Name</th>
         <th scope="col">Blog</th>
+
+          <?php
+  if (isset($_SESSION["username"])) {
+    echo '
         <th scope="col">Update</th>
         <th scope="col">Delete</th>
+    ';
+  }
+  ?>
+        
         </tr>
     </thead>
     <tbody>
@@ -44,19 +55,24 @@
         <tr>
           <td><?php echo $row['name']; ?></td>
           <td><?php echo $row['blog']; ?></td>
-          <td><a href="./update_blog.php?id=<?php echo $row['id']; ?>" class="btn btn-success">Update</a></td>
-          <td><a href="delete_blog.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a></td>
-        </tr>
+<?php
+  if (isset($_SESSION["username"])) {
+    echo '
+          <td><a href="./update_blog.php?id='.$row['id'].'" class="btn btn-success">Update</a></td>
+          <td><a href="delete_blog.php?id='.$row['id'].'" class="btn btn-danger">Delete</a></td>
+    ';
+  }
+?>
 
+        </tr>
         <?php
       }
     }
-
     ?>
     </tbody>
     </table>
 
-  <form action="insert_blog.php" method="post" >
+  <form action="insert_blog.php" method="post">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">

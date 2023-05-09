@@ -1,7 +1,9 @@
    <?php include "./headFoot/header.php"; ?>
    <?php include "../db/dbconn.php"; ?>
 
-
+<div class="container w-200px m-auto text-center">
+    <h1>Register Form</h1>
+</div>
 
 <form action="register.php" method="post" >
     <div class="modal-dialog">

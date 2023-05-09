@@ -1,6 +1,9 @@
    <?php include("./auth/headFoot/header.php") ?>
    <?php include("./db/dbconn.php") ?>
 
+   <div class="container w-200px m-auto text-center">
+    <h1>Login Form</h1>
+</div>
   <?php
   if (isset($_GET['message'])){
     echo "<h4 class='container w-200px m-auto text-center'>".$_GET['message']."</h4>";

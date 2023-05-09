@@ -7,6 +7,3 @@
     <title>CRUD</title>
 </head>
 <body>
-<div class="container w-200px m-auto text-center">
-    <h1>Auth Application</h1>
-</div>
